@@ -1,6 +1,8 @@
 
 
 function wordCounter(){
-	var wordString = "hello world"//document.getElementByName('string').value;
-	alert(wordString)
+	var wordList = document.getElementById('textString').value.split(" ");
+	var wordCount = wordList.length;
+
+	alert("Word Count: " + wordCount)
 }
