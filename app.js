@@ -15,5 +15,12 @@ function wordCounter(){
 		wordCountString += word + ":  " + wordCountList[word] + "\n";
 	}
 
-	alert("Total Word Count: " + wordCount + "\n\n" + wordCountString);
+	//alert("Total Word Count: " + wordCount + "\n\n" + wordCountString);
+
+	showResults();
+}
+
+
+function showResults(){
+	document.getElementById('summary').setAttribute("display","block");
 }

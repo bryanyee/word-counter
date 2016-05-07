@@ -1,6 +1,22 @@
 body {
 	background-color: #5A4B3C;
-	text-align: center;
-	margin-top: 30px;
 	color: white;
+	text-align: center;
+}
+
+#container {
+	margin: 0 auto;
+	margin-top: 30pt;
+	width: 470pt;
+	border: 1pt solid red;
+}
+
+h1 {
+	text-align: center;
+}
+
+#summary {
+	text-align: left;
+	display: hide;
+	border: 1pt solid blue;
 }
