@@ -7,7 +7,7 @@ body {
 #container {
 	margin: 0 auto;
 	margin-top: 30pt;
-	width: 470pt;
+	width: 550pt;
 	border: 1pt solid red;
 }
 
@@ -17,6 +17,6 @@ h1 {
 
 #summary {
 	text-align: left;
-	display: hide;
+	display: none;
 	border: 1pt solid blue;
 }
