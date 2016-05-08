@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Word Counter</title>
+	<link rel="stylesheet" type="text/css" href="styles.css">
+</head>	
+
+<body>
+
+<h1>Word Counter</h1>
+<p>Insert text below.</p>
+
+<textarea rows="20" cols="100" name="string"></textarea>
+<br>
+<input type="button" value="Count!" onclick="wordCounter()">
+
+<script src="app.js"></script>
+</body>
+</html>
+
+<!--
+Features:
+1) Total word count
+Exclude punctation
+Case-insensitive
+Include apostrophes and hyphens
+
+2) Count of each word
+3) Option to exclude common words
+
+4) Choose words to count
+
+5) Export results into an excel file
+-->
+
+
+
+
+
+
+<!--
+http://www.sitepoint.com/build-your-own-chrome-extension-a-google-documents-word-count-tool/
+
+$(document).ready(function(){
+	countWords();
+});
+
+function countWords() {
+	var number = 0;
+	$('span.kix-lineview-text-block').each(function(i, obj){
+		number += $(obj).text().split(/s+/).length;
+	});
+	$('span#GDWC_wordsTotal').text(number + ' total words');
+	timeout = setTimeout('countWords()', 5000);
+}
+
+
+
+
+words = $(obj).text().match(/S+/g); 
+var words = $(obj).text().replace(/W+/g, ' ').match(/S+/g); 
+
+-->
