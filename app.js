@@ -2,7 +2,7 @@ var wordCount, wordCountList;
 
 function wordCounter(){
 	//Count all words
-	var wordList = document.getElementById('textString').value.split(" ");
+	var wordList = document.getElementById('textString').value.replace(/[^\w\d' -]/gm, "").split(" ");
 	wordCount = wordList.length;
 
 	//Count each unique word
