@@ -3,10 +3,11 @@ var wordCount, wordCountList, summary;
 function wordCounter(){
 	//Store all the words in a list, excluding punctuation (include hypens and apostrophes)
 	var wordList = document.getElementById('textString').value
-		.replace(/[^\w\d' -]|-{2,}/gm, " ")		//removes unacceptable punctuation
-		.replace(/\s{2,}|\b- | -\b/gm, " ")		//removes extra spaces, tabs and newlines, and prefix/suffix hyphens
-		.replace(/^\s|\s$|^-|-$/g, "")			//removes white spaces and hyphens at the beginning or end of the string
-		.toLowerCase()							//converts string to lower case
+		.replace(/[^\w\d' -]|-{2,}/gm, " ")	//removes unacceptable punctuation and multiple hyphens/dashes
+		.replace(/\b-\s|\s-\b/gm, " ")		//removes prefix/suffix hyphens/dashes
+		.replace(/\s{2,}/gm, " ")			//removes extra spaces, tabs and newlines
+		.replace(/^\s|\s$|^-|-$/g, "")		//removes white spaces and hyphens at the beginning or end of the string
+		.toLowerCase()						//converts string to lower case
 		.split(" ");
 	wordCount = wordList.length;
 
