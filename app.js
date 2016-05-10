@@ -1,8 +1,12 @@
 var wordCount, wordCountList;
 
 function wordCounter(){
-	//Count all words
-	var wordList = document.getElementById('textString').value.replace(/[^\w\d' -]/gm, "").split(" ");
+	//Count all words, excluding punctuation (include hypens and apostrophes)
+	var wordList = document.getElementById('textString').value
+		.replace(/\s{2,}/gm, " ")		//removes extra spaces, tabs and newlines
+		.replace(/[^\w\d' -]/gm, "")	//removes unacceptable punctuation
+		.toLowerCase()					//converts string to lower case
+		.split(" ");
 	wordCount = wordList.length;
 
 	//Count each unique word
