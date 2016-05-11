@@ -1,4 +1,4 @@
-var wordCount, wordCountListArr, summary;
+var wordCount, wordCountListArr, summary, valid;
 
 function wordCounter(){
 	//Store all the words in a list, excluding punctuation (include hypens and apostrophes)
@@ -9,7 +9,12 @@ function wordCounter(){
 		.replace(/^['-\s]|['-\s]$/g, "")		//removes white spaces, hyphens and apostrophes at the beginning or end of the string
 		.toLowerCase()							//converts string to lower case
 		.split(" ");
-	wordCount = ( (wordList.length === 1 && (wordList[0] === "" || wordList[0] === " ") ) || wordList.length === 0) ? 0 : wordList.length;
+
+	//Checks if the input text is valid
+	valid = ( (wordList.length === 1 && (wordList[0] === "" || wordList[0] === " ") ) || wordList.length === 0) ? false : true;
+	
+	//Set total world count
+	wordCount = valid ? wordList.length : 0;
 
 	//Count each unique word and store in an object
 	var wordCountListObj = {};
@@ -45,16 +50,19 @@ function createAndShowSummary(){
 	var summaryText = document.createTextNode("Total Word Count: " + wordCount);
 	summary.appendChild(summaryText);
 
-	var createBreak = () => document.createElement('br');
-	summary.appendChild(createBreak());
-	summary.appendChild(createBreak());
-
-	//Add counts for each unique word to the 'Summary' div
-	wordCountListArr.forEach( word => {
-		summaryText = document.createTextNode(word[0] + ":  " + word[1]);
-		summary.appendChild(summaryText);
+	//Add additional word count details only if there is valid input text
+	if (valid){
+		var createBreak = () => document.createElement('br');
 		summary.appendChild(createBreak());
-	});
+		summary.appendChild(createBreak());
+
+		//Add counts for each unique word to the 'Summary' div
+		wordCountListArr.forEach( word => {
+			summaryText = document.createTextNode(word[0] + ":  " + word[1]);
+			summary.appendChild(summaryText);
+			summary.appendChild(createBreak());
+		});
+	}
 
 	//Add the 'Summary'div to the webpage
 	document.getElementById('container').appendChild(summary);
