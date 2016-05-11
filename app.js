@@ -1,17 +1,20 @@
 var wordCount, wordCountListArr, summary, valid;
 
 function wordCounter(){
+	//Retrieve the text from the webpage textarea
+	var textAreaString = document.getElementById('textString').value;
+
 	//Store all the words in a list, excluding punctuation (include hypens and apostrophes)
-	var wordList = document.getElementById('textString').value
+	var wordList = textAreaString
 		.replace(/[^\w\d' -]|['-]{2,}/gm, " ")	//removes unacceptable punctuation and repeating hyphens/dashes and apostrophes
-		.replace(/\b['-]\s|\s['-]\b/gm, " ")	//removes prefix or suffix hyphens/dashes and apostrophes
+		.replace(/[\b ]['-]\s|\s['-][\b ]/gm, " ")	//removes prefix or suffix hyphens/dashes and apostrophes
 		.replace(/\s{2,}/gm, " ")				//removes extra spaces, tabs and newlines
 		.replace(/^['-\s]|['-\s]$/g, "")		//removes white spaces, hyphens and apostrophes at the beginning or end of the string
 		.toLowerCase()							//converts string to lower case
 		.split(" ");
 
 	//Checks if the input text is valid
-	valid = ( (wordList.length === 1 && (wordList[0] === "" || wordList[0] === " ") ) || wordList.length === 0) ? false : true;
+	valid = /[\w\d]/.test(textAreaString) ? true : false;
 	
 	//Set total world count
 	wordCount = valid ? wordList.length : 0;
