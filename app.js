@@ -1,4 +1,4 @@
-var wordCount, wordCountListArr = [], summary;
+var wordCount, wordCountListArr, summary;
 
 function wordCounter(){
 	//Store all the words in a list, excluding punctuation (include hypens and apostrophes)
@@ -9,7 +9,7 @@ function wordCounter(){
 		.replace(/^['-\s]|['-\s]$/g, "")		//removes white spaces, hyphens and apostrophes at the beginning or end of the string
 		.toLowerCase()							//converts string to lower case
 		.split(" ");
-	wordCount = wordList.length;
+	wordCount = ( (wordList.length === 1 && (wordList[0] === "" || wordList[0] === " ") ) || wordList.length === 0) ? 0 : wordList.length;
 
 	//Count each unique word and store in an object
 	var wordCountListObj = {};
@@ -19,6 +19,7 @@ function wordCounter(){
 	});
 
 	//Convert the word count object into an array
+	wordCountListArr = [];
 	for(let word in wordCountListObj){ wordCountListArr.push([word, wordCountListObj[word]]) }
 
 	//Sort the array from highest to lowest count
