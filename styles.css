@@ -7,6 +7,7 @@ body {
 #container {
 	margin: 0 auto;
 	margin-top: 30pt;
+	margin-bottom: 20pt;
 	width: 550pt;
 }
 
@@ -17,4 +18,24 @@ h1 {
 #summary {
 	text-align: left;
 	display: block;
+}
+
+.row {
+	clear: both;
+	display: block;
+	color: black;
+}
+
+.wordCell {
+	min-width: 60pt;
+	padding: 3pt;
+	float: left;
+	background-color: white;
+}
+
+.countCell {
+	width: 60pt;
+	padding: 3pt;
+	float: left;
+	background-color: white;
 }

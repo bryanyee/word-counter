@@ -1,4 +1,7 @@
 var wordCount, wordCountListArr, summary, valid;
+var createBreak = () => document.createElement('br');
+var createDiv = () => document.createElement('div');
+						
 
 function wordCounter(){
 	//Retrieve the text from the webpage textarea
@@ -7,7 +10,7 @@ function wordCounter(){
 	//Store all the words in a list, excluding punctuation (include hypens and apostrophes)
 	var wordList = textAreaString
 		.replace(/[^\w\d' -]|[ '-]{2,}|[\b\s]['-]\s|\s['-][\b\s]/gm, " ")	//removes unacceptable punctuation, whitespaces, and hyphens/dashes and apostrophes (repeating or prefix/suffix)
-		.replace(/[^\w\d' -]|[ '-]{2,}|[\b\s]['-]\s|\s['-][\b\s]/gm, " ")	//repeats the replace method to catch any unacceptable characters that weren't caught in the first method call
+		.replace(/[^\w\d' -]|[ '-]{2,}|[\b\s]['-]\s|\s['-][\b\s]/gm, " ")	//repeats the replace method to catch any unacceptable characters that weren't caught in the first run of the method
 		.replace(/^['-\s]|['-\s]$/g, "")		//removes white spaces, hyphens and apostrophes at the beginning or end of the string
 		.toLowerCase()							//converts string to lower case
 		.split(" ");
@@ -41,7 +44,7 @@ function createAndShowSummary(){
 	//Prepare the 'Summary' div to display the results
 	if(summary !== undefined) summary.remove();
 
-	summary = document.createElement('div');
+	summary = createDiv();;
 	summary.id = 'summary';
 
 	var summaryHeader = document.createElement('h1');
@@ -54,16 +57,56 @@ function createAndShowSummary(){
 
 	//Add additional word count details only if there is valid input text
 	if (valid){
-		var createBreak = () => document.createElement('br');
 		summary.appendChild(createBreak());
 		summary.appendChild(createBreak());
 
-		//Add counts for each unique word to the 'Summary' div
+		var tableCellOne, tableCellTwo, row, counter = 1;
+
+		//Create headers for the unique word count table
+		row = createDiv();
+		row.className = 'row';
+		tableCellOne = createDiv();
+		tableCellOne.className = 'wordCell';
+		tableCellTwo = createDiv();
+		tableCellTwo.className = 'countCell';
+		tableCellOne.appendChild(document.createTextNode('Word'));
+		tableCellTwo.appendChild(document.createTextNode('Frequency'));
+		tableCellOne.style.fontWeight = 'bold';
+		tableCellTwo.style.fontWeight = 'bold';
+		row.appendChild(tableCellOne);
+		row.appendChild(tableCellTwo);
+		summary.appendChild(row);
+
 		wordCountListArr.forEach( word => {
-			summaryText = document.createTextNode(word[0] + ":  " + word[1]);
-			summary.appendChild(summaryText);
+			row = createDiv();
+			row.className = 'row';
+
+			//create an HTML element for each word and its respective count (in a table/cell format)
+			tableCellOne = createDiv();
+			tableCellOne.className = 'wordCell';
+
+			tableCellTwo = createDiv();
+			tableCellTwo.className = 'countCell';
+			
+			//Add the word and its respective count to the new cells
+			tableCellOne.appendChild(document.createTextNode(word[0]));
+			tableCellTwo.appendChild(document.createTextNode(word[1]));
+
+			//Alternate the color of every other table row
+			if(counter % 2 !== 0){
+				tableCellOne.style.backgroundColor = '#d3d3d3';
+				tableCellTwo.style.backgroundColor = '#d3d3d3';
+			}
+
+			counter++;
+
+			//Add the completed cells to the Summary
+			row.appendChild(tableCellOne);
+			row.appendChild(tableCellTwo);
+			summary.appendChild(row);
+		});  
+		
 			summary.appendChild(createBreak());
-		});
 	}
 
 	//Add the 'Summary'div to the webpage
