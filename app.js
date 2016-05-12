@@ -6,9 +6,8 @@ function wordCounter(){
 
 	//Store all the words in a list, excluding punctuation (include hypens and apostrophes)
 	var wordList = textAreaString
-		.replace(/[^\w\d' -]|['-]{2,}/gm, " ")	//removes unacceptable punctuation and repeating hyphens/dashes and apostrophes
-		.replace(/[\b ]['-]\s|\s['-][\b ]/gm, " ")	//removes prefix or suffix hyphens/dashes and apostrophes
-		.replace(/\s{2,}/gm, " ")				//removes extra spaces, tabs and newlines
+		.replace(/[^\w\d' -]|[ '-]{2,}|[\b\s]['-]\s|\s['-][\b\s]/gm, " ")	//removes unacceptable punctuation, whitespaces, and hyphens/dashes and apostrophes (repeating or prefix/suffix)
+		.replace(/[^\w\d' -]|[ '-]{2,}|[\b\s]['-]\s|\s['-][\b\s]/gm, " ")	//repeats the replace method to catch any unacceptable characters that weren't caught in the first method call
 		.replace(/^['-\s]|['-\s]$/g, "")		//removes white spaces, hyphens and apostrophes at the beginning or end of the string
 		.toLowerCase()							//converts string to lower case
 		.split(" ");
