@@ -1,7 +1,6 @@
 var wordCount, wordCountListArr, summary, valid;
 var createBreak = () => document.createElement('br');
-var createDiv = () => document.createElement('div');
-						
+var createDiv = () => document.createElement('div');	
 
 function wordCounter(){
 	//Retrieve the text from the webpage textarea
@@ -111,4 +110,13 @@ function createAndShowSummary(){
 
 	//Add the 'Summary'div to the webpage
 	document.getElementById('container').appendChild(summary);
+
+
+	//Set the width of the word cells to the max width
+	var allWordCells = document.getElementsByClassName('wordCell');
+	var currentLength = allWordCells[0].clientWidth;		//clientWidth property (read-only) is the width property in pixels
+	var maxLength = currentLength;
+
+	Array.prototype.forEach.call(allWordCells, wordCell => { if(wordCell.clientWidth > maxLength) maxLength = wordCell.clientWidth });
+	if(maxLength > currentLength) Array.prototype.forEach.call(allWordCells, wordCell => { wordCell.style.width = maxLength.toString() + "px" });
 }
