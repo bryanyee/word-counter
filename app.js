@@ -9,14 +9,14 @@ function wordCounter(){
 
 	//Store all the words in a list, excluding punctuation (include hypens and apostrophes)
 	var wordList = textAreaString
-		.replace(/[^\w\d' -]|[ '-]{2,}|[\b\s]['-]\s|\s['-][\b\s]/gm, " ")	//removes unacceptable punctuation, whitespaces, and hyphens/dashes and apostrophes (repeating or prefix/suffix)
-		.replace(/[^\w\d' -]|[ '-]{2,}|[\b\s]['-]\s|\s['-][\b\s]/gm, " ")	//repeats the replace method to catch any unacceptable characters that weren't caught in the first run of the method
+		.replace(/[^\w' -]|[ '-]{2,}|[\b\s]['-]\s|\s['-][\b\s]|_/gm, " ")	//removes unacceptable punctuation, whitespaces, and hyphens/dashes and apostrophes (repeating or prefix/suffix)
+		.replace(/[^\w' -]|[ '-]{2,}|[\b\s]['-]\s|\s['-][\b\s]|_/gm, " ")	//repeats the replace method to catch any unacceptable characters that weren't caught in the first run of the method
 		.replace(/^['-\s]|['-\s]$/g, "")		//removes white spaces, hyphens and apostrophes at the beginning or end of the string
 		.toLowerCase()							//converts string to lower case
 		.split(" ");
 
 	//Checks if the input text is valid
-	valid = /[\w\d]/.test(textAreaString) ? true : false;
+	valid = /[a-zA-Z\d]/.test(textAreaString) ? true : false;
 	
 	//Set total world count
 	wordCount = valid ? wordList.length : 0;
@@ -105,7 +105,7 @@ function createAndShowSummary(){
 			row.appendChild(tableCellTwo);
 			summary.appendChild(row);
 		});  
-		
+
 			summary.appendChild(createBreak());
 	}
 
