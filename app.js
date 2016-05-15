@@ -8,6 +8,7 @@ function wordCounter(){
 
 	//Store all the words in a list, excluding punctuation (include hypens and apostrophes)
 	var wordList = textAreaString
+		.replace(/[\u2018\u2019]/g, "'")		//replaces curly quotes with straight quotes
 		.replace(/[^\w' -]|[ '-]{2,}|[\b\s]['-]\s|\s['-][\b\s]|_/gm, " ")	//removes unacceptable punctuation, whitespaces, and hyphens/dashes and apostrophes (repeating or prefix/suffix)
 		.replace(/[^\w' -]|[ '-]{2,}|[\b\s]['-]\s|\s['-][\b\s]|_/gm, " ")	//repeats the replace method to catch any unacceptable characters that weren't caught in the first run of the method
 		.replace(/^['-\s]|['-\s]$/g, "")		//removes white spaces, hyphens and apostrophes at the beginning or end of the string
@@ -65,17 +66,17 @@ function createAndShowSummary(){
 			row = createDiv();
 			row.className = 'row';
 
-			//create an HTML element for each word and its respective count (in a table/cell format)
+			//create an HTML element for each word and its respective count (in a table/cell format), with alternating row background color
 			if(counter % 2 !== 0){ row.innerHTML = "<div class='wordCell grayCell'>" + word[0] + "</div><div class='countCell grayCell'>" + word[1] + "</div>" }
 			else { row.innerHTML = "<div class='wordCell whiteCell'>" + word[0] + "</div><div class='countCell whiteCell'>" + word[1] + "</div>" }
 
 			counter++;
 
-			//Add the completed cells to the Summary
+			//Add the completed row to the Summary
 			summary.appendChild(row);
 		});  
 
-			summary.appendChild(createBreak());
+		summary.appendChild(createBreak());
 	}
 
 	//Add the 'Summary'div to the webpage
