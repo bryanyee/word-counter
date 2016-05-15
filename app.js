@@ -1,6 +1,7 @@
 var wordCount, wordCountListArr, summary, valid;
 var createBreak = () => document.createElement('br');
 var createDiv = () => document.createElement('div');	
+var smallWords = ['the','and','of','to','a','in','for','is','on','that','by','this','with','i','you','it','not','or','be','are','at','as','from','an','was','we','can','us','if','has','but','no'];
 
 function wordCounter(){
 	//Retrieve the text from the webpage textarea
@@ -14,6 +15,9 @@ function wordCounter(){
 		.replace(/^['-\s]|['-\s]$/g, "")		//removes white spaces, hyphens and apostrophes at the beginning or end of the string
 		.toLowerCase()							//converts string to lower case
 		.split(" ");
+
+	//filter the word list to exclude common small words
+	wordList = wordList.filter( word => smallWords.indexOf(word) < 0 );
 
 	//Checks if the input text is valid
 	valid = /[a-zA-Z\d]/.test(textAreaString) ? true : false;
