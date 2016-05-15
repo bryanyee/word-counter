@@ -30,12 +30,22 @@ h1 {
 	min-width: 60pt;
 	padding: 3pt;
 	float: left;
-	background-color: white;
 }
 
 .countCell {
 	width: 60pt;
 	padding: 3pt;
 	float: left;
+}
+
+.headerCell {
+	font-weight: bold;
+}
+
+.grayCell {
+	background-color: #d3d3d3;
+}
+
+.whiteCell {
 	background-color: white;
 }

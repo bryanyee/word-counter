@@ -43,65 +43,35 @@ function createAndShowSummary(){
 	//Prepare the 'Summary' div to display the results
 	if(summary !== undefined) summary.remove();
 
-	summary = createDiv();;
+	summary = createDiv();
 	summary.id = 'summary';
-
-	var summaryHeader = document.createElement('h1');
-	summaryHeader.appendChild(document.createTextNode('Summary'));
-	summary.appendChild(summaryHeader);
-	
-	//Add the total word count to the 'Summary' div by appending a text node
-	var summaryText = document.createTextNode("Total Word Count: " + wordCount);
-	summary.appendChild(summaryText);
+	summary.innerHTML = "<h1>Summary</h1>Total Word Count: " + wordCount;
 
 	//Add additional word count details only if there is valid input text
 	if (valid){
 		summary.appendChild(createBreak());
 		summary.appendChild(createBreak());
 
-		var tableCellOne, tableCellTwo, row, counter = 1;
+		var row, counter = 1;
 
-		//Create headers for the unique word count table
+		//Create headers for the unique word count table, and add to the Summary div
 		row = createDiv();
 		row.className = 'row';
-		tableCellOne = createDiv();
-		tableCellOne.className = 'wordCell';
-		tableCellTwo = createDiv();
-		tableCellTwo.className = 'countCell';
-		tableCellOne.appendChild(document.createTextNode('Word'));
-		tableCellTwo.appendChild(document.createTextNode('Frequency'));
-		tableCellOne.style.fontWeight = 'bold';
-		tableCellTwo.style.fontWeight = 'bold';
-		row.appendChild(tableCellOne);
-		row.appendChild(tableCellTwo);
+		row.innerHTML = "<div class='wordCell headerCell whiteCell'>Word</div><div class='countCell headerCell whiteCell'>Frequency</div>";
 		summary.appendChild(row);
 
+		//Add information for each word to the count table
 		wordCountListArr.forEach( word => {
 			row = createDiv();
 			row.className = 'row';
 
 			//create an HTML element for each word and its respective count (in a table/cell format)
-			tableCellOne = createDiv();
-			tableCellOne.className = 'wordCell';
-
-			tableCellTwo = createDiv();
-			tableCellTwo.className = 'countCell';
-			
-			//Add the word and its respective count to the new cells
-			tableCellOne.appendChild(document.createTextNode(word[0]));
-			tableCellTwo.appendChild(document.createTextNode(word[1]));
-
-			//Alternate the color of every other table row
-			if(counter % 2 !== 0){
-				tableCellOne.style.backgroundColor = '#d3d3d3';
-				tableCellTwo.style.backgroundColor = '#d3d3d3';
-			}
+			if(counter % 2 !== 0){ row.innerHTML = "<div class='wordCell grayCell'>" + word[0] + "</div><div class='countCell grayCell'>" + word[1] + "</div>" }
+			else { row.innerHTML = "<div class='wordCell whiteCell'>" + word[0] + "</div><div class='countCell whiteCell'>" + word[1] + "</div>" }
 
 			counter++;
 
 			//Add the completed cells to the Summary
-			row.appendChild(tableCellOne);
-			row.appendChild(tableCellTwo);
 			summary.appendChild(row);
 		});  
 
