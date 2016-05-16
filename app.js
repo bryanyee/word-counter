@@ -17,7 +17,7 @@ function wordCounter(){
 		.split(" ");
 
 	//filter the word list to exclude common small words
-	wordList = wordList.filter( word => smallWords.indexOf(word) < 0 );
+	if(!document.getElementById('excludeCheckBox').checked) wordList = wordList.filter( word => smallWords.indexOf(word) < 0 );
 
 	//Checks if the input text is valid
 	valid = /[a-zA-Z\d]/.test(textAreaString) ? true : false;
