@@ -18,6 +18,7 @@ h1 {
 #summary {
 	text-align: left;
 	display: block;
+	float: left;
 }
 
 #chooseButton{
