@@ -1,4 +1,4 @@
-var wordCount, wordCountListArr, summary, valid, selectContainer;
+var wordCount, wordCountListArr, summary, valid, selectContainer, containsNonAlphaNumCharacters;
 var createBreak = () => document.createElement('br');
 var createDiv = () => document.createElement('div');	
 var smallWords = ['the','and','of','to','a','in','for','is','on','that','by','this','with','i','you','it','not','or','be','are','at','as','from','an','was','we','can','us','if','has','but','no'];
@@ -20,23 +20,22 @@ function wordCounter(specificOption){
 	if(!document.getElementById('excludeCheckBox').checked && specificOption === false) wordList = wordList.filter( word => smallWords.indexOf(word) < 0 );
 
 	//if counting specific words, filter the wordList for specific words
+	containsNonAlphaNumCharacters = false;
 	if(specificOption === true){
 		var specificTextAreaString = document.getElementById('selectString').value;
+
+		containsNonAlphaNumCharacters = /[^a-zA-Z\d\s]/gm.test(specificTextAreaString);
+
 		var specificWords = specificTextAreaString
-			.replace(/\s{2,}|\s/gm, " ")	
-			.replace(/\s{2,}|\s/gm, " ")
+			.replace(/\s{2,}|\s|[^a-zA-Z\d\s]/gm, " ")	
+			.replace(/\s{2,}|\s|[^a-zA-Z\d\s]/gm, " ")	
 			.split(" ");
 
 		wordList = wordList.filter( word => specificWords.indexOf(word) >= 0 );
 	}
-	/*TO DO
-	1) handle non-alphanumeric characters
-	2) count all instances of the word
-	3) fix layout
-	*/
 
 	//Checks if the input text is valid
-	valid = /[a-zA-Z\d]/.test(textAreaString) ? true : false;
+	valid = /[a-zA-Z\d]/m.test(textAreaString) ? true : false;
 	
 	//Set total world count
 	wordCount = valid ? wordList.length : 0;
@@ -67,6 +66,11 @@ function createAndShowSummary(){
 	summary = createDiv();
 	summary.id = 'summary';
 	summary.innerHTML = "<h1>Summary</h1>Total Word Count: " + wordCount;
+
+
+	//If user-specified words include a non-alphanumeric character, show a message
+	if(containsNonAlphaNumCharacters) summary.innerHTML += "<br><br>*Non-alphanumeric characters have<br>been removed from the query.";
+
 
 	//Add additional word count details only if there is valid input text
 	if (valid){
