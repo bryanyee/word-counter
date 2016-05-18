@@ -20,6 +20,10 @@ h1 {
 	display: block;
 }
 
+#chooseButton{
+	float: right;
+}
+
 .row {
 	clear: both;
 	display: block;
@@ -48,4 +52,9 @@ h1 {
 
 .whiteCell {
 	background-color: white;
+}
+
+#selectContainer{
+	float: right;
+	margin-bottom: 20pt;
 }

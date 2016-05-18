@@ -13,8 +13,9 @@
 
 		<textarea rows="20" cols="100" id="textString"></textarea>
 		<br>
-		<input type="button" value="Count!" onclick="wordCounter()">
-		<input type="checkbox" id="excludeCheckBox" checked="checked"><label for="excludeSmallWords">Include small words?</label>
+		<input type="button" value="Count!" onclick="wordCounter(false)">
+		<input type="checkbox" id="excludeCheckBox" checked="checked"><label for="excludeSmallWords">Include common small words?</label>
+		<input type="button" id="chooseButton" value="Choose Specific Words" onclick="selectWords()">
 		<br>
 
 	</div> <!--end of container-->

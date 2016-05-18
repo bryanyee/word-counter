@@ -1,9 +1,9 @@
-var wordCount, wordCountListArr, summary, valid;
+var wordCount, wordCountListArr, summary, valid, selectContainer;
 var createBreak = () => document.createElement('br');
 var createDiv = () => document.createElement('div');	
 var smallWords = ['the','and','of','to','a','in','for','is','on','that','by','this','with','i','you','it','not','or','be','are','at','as','from','an','was','we','can','us','if','has','but','no'];
 
-function wordCounter(){
+function wordCounter(specificOption){
 	//Retrieve the text from the webpage textarea
 	var textAreaString = document.getElementById('textString').value;
 
@@ -16,8 +16,24 @@ function wordCounter(){
 		.toLowerCase()							//converts string to lower case
 		.split(" ");
 
-	//filter the word list to exclude common small words
-	if(!document.getElementById('excludeCheckBox').checked) wordList = wordList.filter( word => smallWords.indexOf(word) < 0 );
+	//filter the word list to exclude common small words, or count only specified words
+	if(!document.getElementById('excludeCheckBox').checked && specificOption === false) wordList = wordList.filter( word => smallWords.indexOf(word) < 0 );
+
+	//if counting specific words, filter the wordList for specific words
+	if(specificOption === true){
+		var specificTextAreaString = document.getElementById('selectString').value;
+		var specificWords = specificTextAreaString
+			.replace(/\s{2,}|\s/gm, " ")	
+			.replace(/\s{2,}|\s/gm, " ")
+			.split(" ");
+
+		wordList = wordList.filter( word => specificWords.indexOf(word) >= 0 );
+	}
+	/*TO DO
+	1) handle non-alphanumeric characters
+	2) count all instances of the word
+	3) fix layout
+	*/
 
 	//Checks if the input text is valid
 	valid = /[a-zA-Z\d]/.test(textAreaString) ? true : false;
@@ -94,4 +110,11 @@ function createAndShowSummary(){
 
 	Array.prototype.forEach.call(allWordCells, wordCell => { if(wordCell.clientWidth > maxLength) maxLength = wordCell.clientWidth });
 	if(maxLength > currentLength) Array.prototype.forEach.call(allWordCells, wordCell => { wordCell.style.width = maxLength.toString() + "px" });
+}
+
+function selectWords(){
+	if(selectContainer === undefined) selectContainer = createDiv();
+	selectContainer.id = "selectContainer";
+	selectContainer.innerHTML = "<br>Enter each word, separated by a space or new line:<br><textarea rows='10' cols='45' id='selectString'></textarea><br><input type='button' value='Count Specific Words!' onclick='wordCounter(true)'><br>";
+	document.getElementById('container').appendChild(selectContainer);
 }
