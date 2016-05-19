@@ -33,8 +33,8 @@ function wordCounter(specificOption){
 
 		//store array of user-specified words
 		specificWords = specificTextAreaString
-			.replace(/\s{2,}|\s|[^a-zA-Z\d\s]/gm, " ")	
-			.replace(/\s{2,}|\s|[^a-zA-Z\d\s]/gm, " ")
+			.replace(/\s{2,}|[^a-zA-Z\d ]/gm, " ")	
+			.replace(/\s{2,}|[^a-zA-Z\d ]/gm, " ")
 			.replace(/^\s|\s$/g, "")
 			.toLowerCase()
 			.split(" ");
