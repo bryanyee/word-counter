@@ -1,4 +1,4 @@
-var wordCount, wordCountListArr, summary, valid, selectContainer, containsNonAlphaNumCharacters;
+var wordCount, wordCountListArr, summary, inputIsValid, selectContainer, containsNonAlphaNumCharacters;
 var createBreak = () => document.createElement('br');
 var createDiv = () => document.createElement('div');	
 var smallWords = ['the','and','of','to','a','in','for','is','on','that','by','this','with','i','you','it','not','or','be','are','at','as','from','an','was','we','can','us','if','has','but','no'];
@@ -20,7 +20,7 @@ function wordCounter(specificOption){
 	if(!document.getElementById('excludeCheckBox').checked && specificOption === false) wordList = wordList.filter( word => smallWords.indexOf(word) < 0 );
 
 	//Checks if the input text is valid
-	valid = /[a-zA-Z\d]/m.test(textAreaString) ? true : false;
+	inputIsValid = /[a-zA-Z\d]/m.test(textAreaString) ? true : false;
 
 	//if counting specific words, filter the wordList for specific words, and change local variables as necessary
 	containsNonAlphaNumCharacters = false;
@@ -41,11 +41,11 @@ function wordCounter(specificOption){
 
 		wordList = wordList.filter( word => specificWords.indexOf(word) >= 0 );
 
-		if (specificWords[0] === '') valid = false;
+		inputIsValid = inputIsValid && /[a-zA-Z\d]/m.test(specificTextAreaString);
 	}
 	
 	//Set total world count
-	wordCount = valid ? wordList.length : 0;
+	wordCount = inputIsValid ? wordList.length : 0;
 
 	//Count each unique word and store in an object
 	var wordCountListObj = {};
@@ -85,7 +85,7 @@ function createAndShowSummary(){
 
 
 	//Add additional word count details only if there is valid input text, and optionally valid user-specified words
-	if (valid){
+	if (inputIsValid){
 		summary.appendChild(createBreak());
 		summary.appendChild(createBreak());
 
