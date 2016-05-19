@@ -120,8 +120,19 @@ function createAndShowSummary(){
 }
 
 function selectWords(){
-	if(selectContainer === undefined) selectContainer = createDiv();
-	selectContainer.id = "selectContainer";
-	selectContainer.innerHTML = "<br>Enter each word, separated by a space or new line:<br><textarea rows='10' cols='45' id='selectString'></textarea><br><input type='button' value='Count Specific Words!' onclick='wordCounter(true)'><br>";
-	document.getElementById('container').appendChild(selectContainer);
+	//If the 'Select Words' option area is already showing on th page, hide the area if the user clicks the button again
+	if (selectContainer !== undefined && selectContainer.style.display === "inline"){ selectContainer.style.display = "none" }
+
+	//Otherwise, create or re-show the 'Select Words' option area
+	else {
+		if (selectContainer === undefined){ 
+			selectContainer = createDiv();
+			selectContainer.id = "selectContainer";
+			selectContainer.style.display = "inline";
+
+			selectContainer.innerHTML = "<br>Enter each word, separated by a space or new line:<br><textarea rows='10' cols='45' id='selectString'></textarea><br><input type='button' value='Count Specific Words!' onclick='wordCounter(true)'><br>";
+			document.getElementById('container').appendChild(selectContainer);
+		}
+		else { selectContainer.style.display = "inline" }
+	}
 }
