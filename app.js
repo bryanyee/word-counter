@@ -84,9 +84,8 @@ function createAndShowSummary(){
 	if(containsNonAlphaNumCharacters) summary.innerHTML += "<br><br>*Non-alphanumeric characters have<br>been removed from the query.";
 
 
-	//Add additional word count details only if there is valid input text
-	//If counting user-speicified words, also check if there are any matches
-	if (valid && wordCountListArr.length !== 0){
+	//Add additional word count details only if there is valid input text, and optionally valid user-specified words
+	if (valid){
 		summary.appendChild(createBreak());
 		summary.appendChild(createBreak());
 
