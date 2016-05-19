@@ -19,25 +19,30 @@ function wordCounter(specificOption){
 	//filter the word list to exclude common small words
 	if(!document.getElementById('excludeCheckBox').checked && specificOption === false) wordList = wordList.filter( word => smallWords.indexOf(word) < 0 );
 
-	//if counting specific words, filter the wordList for specific words
+	//Checks if the input text is valid
+	valid = /[a-zA-Z\d]/m.test(textAreaString) ? true : false;
+
+	//if counting specific words, filter the wordList for specific words, and change local variables as necessary
 	containsNonAlphaNumCharacters = false;
+	var specificWords;
+
 	if(specificOption === true){
 		var specificTextAreaString = document.getElementById('selectString').value;
 
 		containsNonAlphaNumCharacters = /[^a-zA-Z\d\s]/gm.test(specificTextAreaString);
 
 		//store array of user-specified words
-		var specificWords = specificTextAreaString
+		specificWords = specificTextAreaString
 			.replace(/\s{2,}|\s|[^a-zA-Z\d\s]/gm, " ")	
-			.replace(/\s{2,}|\s|[^a-zA-Z\d\s]/gm, " ")	
+			.replace(/\s{2,}|\s|[^a-zA-Z\d\s]/gm, " ")
+			.replace(/^\s|\s$/g, "")
 			.toLowerCase()
 			.split(" ");
 
 		wordList = wordList.filter( word => specificWords.indexOf(word) >= 0 );
-	}
 
-	//Checks if the input text is valid
-	valid = /[a-zA-Z\d]/m.test(textAreaString) ? true : false;
+		if (specificWords[0] === '') valid = false;
+	}
 	
 	//Set total world count
 	wordCount = valid ? wordList.length : 0;
@@ -48,6 +53,11 @@ function wordCounter(specificOption){
 		if (wordCountListObj[word] === undefined) { wordCountListObj[word] = 1 }
 		else { wordCountListObj[word]++ }
 	});
+
+	//If counting specific words and a word is not in the text, set its count to zero
+	if (specificOption === true) {
+		specificWords.forEach( word => { if (wordCountListObj[word] === undefined) wordCountListObj[word] = 0 } );
+	}
 
 	//Convert the word count object into an array
 	wordCountListArr = [];
