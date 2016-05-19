@@ -16,7 +16,7 @@ function wordCounter(specificOption){
 		.toLowerCase()							//converts string to lower case
 		.split(" ");
 
-	//filter the word list to exclude common small words, or count only specified words
+	//filter the word list to exclude common small words
 	if(!document.getElementById('excludeCheckBox').checked && specificOption === false) wordList = wordList.filter( word => smallWords.indexOf(word) < 0 );
 
 	//if counting specific words, filter the wordList for specific words
@@ -26,6 +26,7 @@ function wordCounter(specificOption){
 
 		containsNonAlphaNumCharacters = /[^a-zA-Z\d\s]/gm.test(specificTextAreaString);
 
+		//store array of user-specified words
 		var specificWords = specificTextAreaString
 			.replace(/\s{2,}|\s|[^a-zA-Z\d\s]/gm, " ")	
 			.replace(/\s{2,}|\s|[^a-zA-Z\d\s]/gm, " ")	
@@ -74,7 +75,8 @@ function createAndShowSummary(){
 
 
 	//Add additional word count details only if there is valid input text
-	if (valid){
+	//If counting user-speicified words, also check if there are any matches
+	if (valid && wordCountListArr.length !== 0){
 		summary.appendChild(createBreak());
 		summary.appendChild(createBreak());
 
