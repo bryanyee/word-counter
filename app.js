@@ -29,6 +29,7 @@ function wordCounter(specificOption){
 		var specificWords = specificTextAreaString
 			.replace(/\s{2,}|\s|[^a-zA-Z\d\s]/gm, " ")	
 			.replace(/\s{2,}|\s|[^a-zA-Z\d\s]/gm, " ")	
+			.toLowerCase()
 			.split(" ");
 
 		wordList = wordList.filter( word => specificWords.indexOf(word) >= 0 );
