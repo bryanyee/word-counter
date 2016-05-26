@@ -20,6 +20,10 @@ h1 {
 	text-align: center;
 }
 
+#infoButton {
+	float: right;
+}
+
 #textString {
 	width: 100%;
 }
