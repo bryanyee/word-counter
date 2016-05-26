@@ -24,6 +24,10 @@ h1 {
 	float: right;
 }
 
+#infoSection {
+	display: none;
+}
+
 #textString {
 	width: 100%;
 }

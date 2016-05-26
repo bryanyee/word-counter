@@ -11,7 +11,13 @@
 		<h1>Word Counter</h1>
 		<p class="comment">Insert text below.</p>
 
-		<input type="button" id="infoButton" value="Info" onClick="showInfo">
+		<div id="infoSection">
+			Word Counter is a tool for counting the total number of words in a text, and will also provide a count of each unique word. You may also choose specific words to count.
+			<br><br>
+			Word Counter ignores all punctation, except for hyphens or apostrophes inbetween alphanumeric characters. User-specified words may only include alphanumeric characters.
+			<br>
+		</div> <!--end of infoSection-->
+		<input type="button" id="infoButton" value="Info" onclick="showInfo()">
 		<textarea rows="20" cols="100" id="textString"></textarea>
 		<br>
 		<input type="button" value="Count!" onclick="wordCounter(false)">

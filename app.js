@@ -2,6 +2,7 @@ var wordCount, wordCountListArr, summary, inputIsValid, selectContainer, contain
 var createBreak = () => document.createElement('br');
 var createDiv = () => document.createElement('div');	
 var smallWords = ['the','and','of','to','a','in','for','is','on','that','by','this','with','i','you','it','not','or','be','are','at','as','from','an','was','we','can','us','if','has','but','no'];
+var infoSection = document.getElementById('infoSection');
 
 function wordCounter(specificOption){
 	//Retrieve the text from the webpage textarea
@@ -24,6 +25,7 @@ function wordCounter(specificOption){
 
 	//if counting specific words, filter the wordList for specific words, and change local variables as necessary
 	containsNonAlphaNumCharacters = false;
+
 	var specificWords;
 
 	if(specificOption === true){
@@ -59,7 +61,7 @@ function wordCounter(specificOption){
 		specificWords.forEach( word => { if (wordCountListObj[word] === undefined) wordCountListObj[word] = 0 } );
 	}
 
-	//Convert the word count object into an array
+	//Convert the word count object into an array of arrays
 	wordCountListArr = [];
 	for(let word in wordCountListObj){ wordCountListArr.push([word, wordCountListObj[word]]) }
 
@@ -94,7 +96,7 @@ function createAndShowSummary(){
 		//Create headers for the unique word count table, and add to the Summary div
 		row = createDiv();
 		row.className = 'row';
-		row.innerHTML = "<div class='wordCell headerCell whiteCell'>Word</div><div class='countCell headerCell whiteCell'>Frequency</div>";
+		row.innerHTML = "<div class='wordCell headerCell whiteCell'>Word</div><div class='countCell headerCell whiteCell'>Count</div>";
 		summary.appendChild(row);
 
 		//Add information for each word to the count table
@@ -145,3 +147,8 @@ function selectWords(){
 		else { selectContainer.style.display = "inline" }
 	}
 }
+
+function showInfo(){
+	infoSection.style.display = (infoSection.style.display === "inline") ? "none" : "inline";
+}
+
