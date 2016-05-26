@@ -46,7 +46,7 @@ function wordCounter(specificOption){
 		inputIsValid = inputIsValid && /[a-zA-Z\d]/m.test(specificTextAreaString);
 	}
 	
-	//Set total world count
+	//Set total word count
 	wordCount = inputIsValid ? wordList.length : 0;
 
 	//Count each unique word and store in an object
